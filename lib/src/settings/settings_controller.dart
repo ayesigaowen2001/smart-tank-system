@@ -1,4 +1,3 @@
-// Repository remote: https://github.com/ayesigaowen2001/smart-tank-system.git
 import 'package:flutter/material.dart';
 
 import 'settings_service.dart';
