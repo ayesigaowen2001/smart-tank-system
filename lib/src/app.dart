@@ -7,6 +7,7 @@ import 'features/auth/controller/auth_controller.dart';
 import 'features/auth/view/login_page.dart';
 import 'features/sample_item_details_view.dart';
 import 'features/sample_item_list_view.dart';
+import 'settings/app_theme.dart';
 import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
 
@@ -35,8 +36,8 @@ class MyApp extends StatelessWidget {
           Locale('en', ''),
         ],
         onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
-        theme: ThemeData(),
-        darkTheme: ThemeData.dark(),
+        theme: AppTheme.lightTheme(),
+        darkTheme: AppTheme.darkTheme(),
         themeMode: settingsController.themeMode,
         initialRoute: '/login',
         onGenerateRoute: _generateRoutes,
