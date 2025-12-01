@@ -10,6 +10,15 @@ class AppTheme {
   static const Color _lightSurface = Color(0xFFFFFFFF);
   static const Color _lightError = Color(0xFFB3261E);
 
+  // System Theme Colors (green background + amber primary)
+  static const Color _systemPrimary = Color(0xFFFDBD01); // amber
+  static const Color _systemPrimaryContainer = Color(0xFFFFF7E0);
+  static const Color _systemSecondary = Color(0xFF6C5CE7);
+  static const Color _systemTertiary = Color(0xFF00C896);
+  static const Color _systemBackground = Color(0xFFADFF2F); // bright green
+  static const Color _systemSurface = Color(0xFFFFFFFF); // white cards
+  static const Color _systemError = Color(0xFFB3261E);
+
   // Dark Theme Colors
   static const Color _darkPrimary = Color(0xFF90CAF9);
   static const Color _darkPrimaryContainer = Color(0xFF1A3A52);
@@ -28,7 +37,7 @@ class AppTheme {
         primary: _lightPrimary,
         primaryContainer: _lightPrimaryContainer,
         secondary: _lightSecondary,
-        tertiary: _lightTertiary,
+        tertiary: Color.fromARGB(255, 249, 250, 250),
         surface: _lightSurface,
         error: _lightError,
         onPrimary: Colors.white,
@@ -78,6 +87,71 @@ class AppTheme {
       ),
       cardTheme: CardTheme(
         color: _lightSurface,
+        elevation: 2,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      ),
+    );
+  }
+
+  /// System Theme (green background + amber primary + white cards)
+  static ThemeData systemTheme() {
+    return ThemeData(
+      useMaterial3: true,
+      brightness: Brightness.light,
+      colorScheme: const ColorScheme.light(
+        primary: _systemPrimary,
+        primaryContainer: _systemPrimaryContainer,
+        secondary: _systemSecondary,
+        tertiary: _systemTertiary,
+        surface: _systemSurface,
+        error: _systemError,
+        onPrimary: Colors.black,
+        onSecondary: Colors.white,
+        onSurface: Colors.black87,
+      ),
+      scaffoldBackgroundColor: const Color.fromARGB(255, 251, 252, 250),
+      appBarTheme: const AppBarTheme(
+        backgroundColor: _systemPrimary,
+        foregroundColor: Colors.black,
+        elevation: 2,
+      ),
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
+        backgroundColor: _systemPrimary,
+        foregroundColor: Colors.black,
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: _systemPrimary,
+          foregroundColor: Colors.black,
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          foregroundColor: _systemPrimary,
+          side: const BorderSide(color: _systemPrimary),
+        ),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          foregroundColor: _systemPrimary,
+        ),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(color: Color(0xFFCCCCCC)),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(color: _systemPrimary, width: 2),
+        ),
+      ),
+      cardTheme: CardTheme(
+        color: _systemSurface,
         elevation: 2,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),

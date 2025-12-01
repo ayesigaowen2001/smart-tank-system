@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import 'features/auth/controller/auth_controller.dart';
 import 'features/auth/view/login_page.dart';
+import 'features/dashboard/view/dashboard_page.dart';
 import 'features/sample_item_details_view.dart';
 import 'features/sample_item_list_view.dart';
 import 'settings/app_theme.dart';
@@ -24,24 +25,29 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AuthController()),
         ChangeNotifierProvider(create: (_) => settingsController),
       ],
-      child: MaterialApp(
-        restorationScopeId: 'app',
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: const [
-          Locale('en', ''),
-        ],
-        onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
-        theme: AppTheme.lightTheme(),
-        darkTheme: AppTheme.darkTheme(),
-        themeMode: settingsController.themeMode,
-        initialRoute: '/login',
-        onGenerateRoute: _generateRoutes,
-        home: const LoginPage(),
+      child: ListenableBuilder(
+        listenable: settingsController,
+        builder: (BuildContext context, Widget? child) {
+          return MaterialApp(
+            restorationScopeId: 'app',
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: const [
+              Locale('en', ''),
+            ],
+            onGenerateTitle: (context) =>
+                AppLocalizations.of(context)!.appTitle,
+            theme: AppTheme.systemTheme(),
+            darkTheme: AppTheme.darkTheme(),
+            themeMode: settingsController.themeMode,
+            home: const DashboardPage(),
+            onGenerateRoute: _generateRoutes,
+          );
+        },
       ),
     );
   }
@@ -50,6 +56,8 @@ class MyApp extends StatelessWidget {
     switch (settings.name) {
       case '/login':
         return MaterialPageRoute(builder: (_) => const LoginPage());
+      case '/dashboard':
+        return MaterialPageRoute(builder: (_) => const DashboardPage());
       case SettingsView.routeName:
         return MaterialPageRoute(
             builder: (_) => SettingsView(controller: settingsController));
