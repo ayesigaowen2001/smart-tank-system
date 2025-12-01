@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
             theme: AppTheme.systemTheme(),
             darkTheme: AppTheme.darkTheme(),
             themeMode: settingsController.themeMode,
-            home: const DashboardPage(),
+            home: const LoginPage(),
             onGenerateRoute: _generateRoutes,
           );
         },
