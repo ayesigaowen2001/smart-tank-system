@@ -1,8 +1,10 @@
+buildscript {
+    // Repositories are managed in settings.gradle (dependencyResolutionManagement).
+    // Keep this block for any classpath dependencies if needed.
+}
+
 allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
+    // Repositories are managed in settings.gradle — do not add google() or mavenCentral() here.
 }
 
 rootProject.buildDir = "../build"

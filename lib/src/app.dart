@@ -1,3 +1,12 @@
+// To resolve analyzer errors for generated localization and installed packages:
+// 1) Ensure dependencies are fetched:
+//    flutter pub get
+// 2) Generate localization classes (creates package:flutter_gen/gen_l10n/app_localizations.dart):
+//    flutter gen-l10n
+//    # or: flutter pub get then flutter gen-l10n
+// 3) If analyzer still reports missing URIs, restart your IDE or run:
+//    flutter clean && flutter pub get && flutter gen-l10n
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

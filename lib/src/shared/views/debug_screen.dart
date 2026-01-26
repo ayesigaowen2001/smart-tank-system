@@ -199,19 +199,19 @@ class _DebugScreenState extends State<DebugScreen> {
               // Info Card
               Card(
                 color: Colors.amber.shade50,
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
+                child: const Padding(
+                  padding: EdgeInsets.all(16),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         'What Gets Generated',
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(height: 12),
+                      SizedBox(height: 12),
                       _InfoItem(label: 'Devices (Nodes)', value: '3'),
                       _InfoItem(label: 'Valves', value: '5'),
                       _InfoItem(label: 'Valve State Changes', value: '50'),
@@ -219,7 +219,7 @@ class _DebugScreenState extends State<DebugScreen> {
                       _InfoItem(label: 'Telemetry Readings', value: '60'),
                       _InfoItem(label: 'Log Entries', value: '50'),
                       _InfoItem(label: 'Commands', value: '20'),
-                      const Padding(
+                      Padding(
                         padding: EdgeInsets.only(top: 8),
                         child: Text(
                           'Total: ~250 records',
@@ -239,19 +239,19 @@ class _DebugScreenState extends State<DebugScreen> {
               // Next Steps Card
               Card(
                 color: Colors.purple.shade50,
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
+                child: const Padding(
+                  padding: EdgeInsets.all(16),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         'Next Steps',
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(height: 12),
+                      SizedBox(height: 12),
                       _StepItem(
                         number: '1',
                         title: 'Generate Data',
@@ -274,7 +274,7 @@ class _DebugScreenState extends State<DebugScreen> {
                         description:
                             'Tap refresh buttons and test filters (on Logs)',
                       ),
-                      const Padding(
+                      Padding(
                         padding: EdgeInsets.only(top: 8),
                         child: Text(
                           '✨ You should see populated tables with real data!',
@@ -295,19 +295,19 @@ class _DebugScreenState extends State<DebugScreen> {
               // Testing Checklist
               Card(
                 color: Colors.cyan.shade50,
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
+                child: const Padding(
+                  padding: EdgeInsets.all(16),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         'Testing Checklist',
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(height: 12),
+                      SizedBox(height: 12),
                       _ChecklistItem(
                         icon: Icons.water,
                         text:

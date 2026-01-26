@@ -1,3 +1,15 @@
+// Linux desktop build note:
+// If you see "CMake Error: Could not find compiler set in environment variable CXX: clang++"
+// install a C++ compiler and build tools, for example on Ubuntu/Debian:
+//   sudo apt update
+//   sudo apt install -y build-essential clang cmake ninja-build pkg-config libgtk-3-dev
+// or install build-essential only and set CXX to g++:
+//   sudo apt install -y build-essential
+//   export CXX=g++
+// To persist CXX, add the export line to ~/.bashrc or ~/.profile.
+// After installing, run:
+//   flutter clean && flutter pub get && flutter run
+
 import 'package:flutter/material.dart';
 
 import 'settings_service.dart';

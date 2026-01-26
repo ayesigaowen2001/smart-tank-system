@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer' as developer;
 import 'package:http/http.dart' as http;
 import 'package:google_sign_in/google_sign_in.dart';
 import '../models/user.dart';
@@ -26,10 +27,12 @@ class AuthService {
       );
 
       if (response.statusCode == 200) {
+        developer.log('Login success: $response', name: 'AuthService');
         return User.fromJson(jsonDecode(response.body));
       }
-    } catch (e) {
-      print('Login error: $e');
+    } catch (e, st) {
+      developer.log('Login error: $e',
+          name: 'AuthService', error: e, stackTrace: st);
     }
     return null;
   }
@@ -45,7 +48,8 @@ class AuthService {
       }
 
       // Get the Google ID token
-      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
       final String? idToken = googleAuth.idToken;
 
       // Send the ID token to your backend to verify and create/update user

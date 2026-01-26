@@ -101,17 +101,6 @@ class _DashboardPageState extends State<DashboardPage> {
             'Applied ${flow.toStringAsFixed(0)}% to ${ids.length} valves')));
   }
 
-  Future<void> _applyFlowToTank(Tank tank, double flow) async {
-    // For now, apply to all known valves (no explicit mapping in DB)
-    for (final v in _dbValves) {
-      if (v.id != null) await _applyFlowToValve(v, flow);
-    }
-    if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(
-            'Applied ${flow.toStringAsFixed(0)}% to valves for ${tank.name ?? tank.tankId}')));
-  }
-
   Future<void> _applyFlowToAllValves(double flow) async {
     for (final v in _dbValves) {
       if (v.id != null) await _applyFlowToValve(v, flow);
@@ -499,10 +488,11 @@ class _DashboardPageState extends State<DashboardPage> {
                                       value: _selectedValveIds.contains(v.id),
                                       onChanged: (val) {
                                         setState(() {
-                                          if (val == true)
+                                          if (val == true) {
                                             _selectedValveIds.add(v.id!);
-                                          else
+                                          } else {
                                             _selectedValveIds.remove(v.id);
+                                          }
                                         });
                                       },
                                     )),
@@ -568,11 +558,12 @@ class _DashboardPageState extends State<DashboardPage> {
                                             if (result != null) {
                                               await _applyFlowToValve(
                                                   v, result);
-                                              if (mounted)
+                                              if (mounted) {
                                                 ScaffoldMessenger.of(context)
                                                     .showSnackBar(SnackBar(
                                                         content: Text(
                                                             'Applied ${result.toStringAsFixed(0)}% to ${v.name ?? v.valveId}')));
+                                              }
                                               _loadTanksAndValves();
                                             }
                                           },
@@ -730,7 +721,7 @@ class _SemiMeterPainter extends CustomPainter {
       ..strokeCap = StrokeCap.round;
 
     final progressPaint = Paint()
-      ..shader = SweepGradient(
+      ..shader = const SweepGradient(
         startAngle: pi,
         endAngle: pi * 2,
         colors: [Colors.green, Colors.orange, Colors.red],
@@ -742,8 +733,8 @@ class _SemiMeterPainter extends CustomPainter {
 
     // Full semicircle background
     final rect = Rect.fromCircle(center: center, radius: radius);
-    final startAngle = pi; // left
-    final fullSweep = pi; // 180 degrees
+    const startAngle = pi; // left
+    const fullSweep = pi; // 180 degrees
     canvas.drawArc(rect, startAngle, fullSweep, false, basePaint);
 
     // Progress arc

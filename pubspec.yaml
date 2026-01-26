@@ -38,3 +38,12 @@ flutter:
   assets:
     # Add assets from the images directory to the application.
     - assets/images/
+
+# NOTE: dependencies were resolved successfully. If you want to review or upgrade:
+# 1) See newer versions: `flutter pub outdated`
+# 2) Upgrade safely: `flutter pub upgrade`
+# 3) To attempt major upgrades (may require code changes): `flutter pub upgrade --major-versions`
+# 4) Generate localization files (creates package:flutter_gen/gen_l10n/...):
+#      flutter gen-l10n
+# 5) If analyzer still shows missing generated files, run:
+#      flutter clean && flutter pub get && flutter gen-l10n
