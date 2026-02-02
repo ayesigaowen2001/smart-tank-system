@@ -25,6 +25,7 @@ class DatabaseHelper {
       version: 2,
       onCreate: _onCreate,
       onUpgrade: _onUpgrade,
+      onOpen: _onOpen,
     );
   }
 
@@ -48,11 +49,13 @@ class DatabaseHelper {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         valve_id TEXT UNIQUE NOT NULL,
         node_id INTEGER,
+        tank_id INTEGER,
         name TEXT,
         description TEXT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         synced INTEGER DEFAULT 0,
-        FOREIGN KEY (node_id) REFERENCES nodes(id) ON DELETE CASCADE
+        FOREIGN KEY (node_id) REFERENCES nodes(id) ON DELETE CASCADE,
+        FOREIGN KEY (tank_id) REFERENCES tanks(id) ON DELETE SET NULL
       )
     ''');
 
@@ -147,6 +150,7 @@ class DatabaseHelper {
 
     // Create indexes for faster queries
     await db.execute('CREATE INDEX idx_valve_node ON valves(node_id)');
+    await db.execute('CREATE INDEX idx_valve_tank_id ON valves(tank_id)');
     await db.execute('CREATE INDEX idx_state_valve ON valve_states(valve_id)');
     await db.execute('CREATE INDEX idx_telemetry_node ON telemetry(node_id)');
     await db.execute('CREATE INDEX idx_command_valve ON commands(valve_id)');
@@ -170,6 +174,22 @@ class DatabaseHelper {
       } catch (e) {
         // ignore
       }
+    }
+  }
+
+  Future<void> _onOpen(Database db) async {
+    // Ensure `tank_id` column exists on valves table (covers edge cases where DB was
+    // created before this column was introduced but already at same DB version).
+    try {
+      final info = await db.rawQuery("PRAGMA table_info(valves)");
+      final hasTankId = info.any((row) => row['name'] == 'tank_id');
+      if (!hasTankId) {
+        await db.execute('ALTER TABLE valves ADD COLUMN tank_id INTEGER');
+        await db.execute(
+            'CREATE INDEX IF NOT EXISTS idx_valve_tank_id ON valves(tank_id)');
+      }
+    } catch (e) {
+      // ignore - keep DB usable
     }
   }
 

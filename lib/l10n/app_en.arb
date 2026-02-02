@@ -1,0 +1,11 @@
+{
+  "@@locale": "en",
+  "appTitle": "Smart Tank",
+  "hello": "Hello",
+  "@appTitle": {
+    "description": "The application title shown on the home screen"
+  },
+  "@hello": {
+    "description": "Simple greeting used in tests/example"
+  }
+}

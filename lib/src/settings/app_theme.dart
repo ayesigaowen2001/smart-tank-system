@@ -85,7 +85,7 @@ class AppTheme {
           borderSide: const BorderSide(color: _lightPrimary, width: 2),
         ),
       ),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: _lightSurface,
         elevation: 2,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -150,7 +150,7 @@ class AppTheme {
           borderSide: const BorderSide(color: _systemPrimary, width: 2),
         ),
       ),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: _systemSurface,
         elevation: 2,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -215,7 +215,7 @@ class AppTheme {
           borderSide: const BorderSide(color: _darkPrimary, width: 2),
         ),
       ),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: _darkSurface,
         elevation: 2,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),

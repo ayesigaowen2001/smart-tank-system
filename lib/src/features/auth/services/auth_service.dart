@@ -6,9 +6,12 @@ import '../models/user.dart';
 
 class AuthService {
   final String baseUrl = "https://your-api-url.com"; // Replace later
+  final bool useLocalAuth;
   late final GoogleSignIn _googleSignIn;
 
-  AuthService() {
+  /// When prototyping, set [useLocalAuth] = true to perform authentication locally.
+  /// Local auth accepts ANY email as long as password == 'password'.
+  AuthService({this.useLocalAuth = true}) {
     _googleSignIn = GoogleSignIn(
       scopes: [
         'email',
@@ -19,6 +22,19 @@ class AuthService {
 
   // Traditional email/password login
   Future<User?> login(String email, String password) async {
+    // Local prototype auth (quick and insecure, for dev use only)
+    if (useLocalAuth) {
+      // Accept any email as long as the password is the easy prototype password
+      if (password == 'password') {
+        developer.log('Local login success for $email', name: 'AuthService');
+        return User(id: 'local:$email', email: email, token: 'local-token');
+      } else {
+        developer.log('Local login failed for $email', name: 'AuthService');
+        return null;
+      }
+    }
+
+    // Remote auth (default behavior)
     try {
       final response = await http.post(
         Uri.parse("$baseUrl/login"),
